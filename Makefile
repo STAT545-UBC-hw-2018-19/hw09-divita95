@@ -1,4 +1,4 @@
-all: words.txt vowels_report.html
+all: words.txt report.html vowels_report.html
 
 clean:
 	rm -f words.txt histogram.tsv histogram.png report.md report.html
@@ -21,7 +21,7 @@ histogram.png: histogram.tsv
 
 
 hist_vowels.png: vowels_count.tsv
-	Rscript -e 'library(ggplot2); qplot(x = vowels_new, y = Freq, data=read.delim("$<"),geom = "col") ; ggsave("$@")'
+	Rscript -e 'library(ggplot2); qplot(x = vowels_new, y = Freq, data=read.delim("$<"),geom = "col", xlab = "English Vowels", ylab = "Frequency", fill=I("blue"), col=I("black")) ; ggsave("$@")'
 	rm Rplots.pdf
 
 histogram.tsv: histogram.r words.txt
